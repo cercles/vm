@@ -2,5 +2,12 @@
 - hosts: all
   sudo: True
   tasks:
-    - name: Install OCaml
-      apt: pkg=ocaml-nox state=installed
+    - name: Install packages
+      apt: pkg={{item}} state=installed
+      with_items:
+         - git
+         - ocaml-nox
+    - name: Checkout scade2b
+      git: repo=https://github.com/cercles/scade2b.git
+           dest=src
+           version=c380dec2
