@@ -1,0 +1,6 @@
+---
+- hosts: all
+  sudo: True
+  tasks:
+    - name: Install OCaml
+      apt: pkg=ocaml-nox state=installed
