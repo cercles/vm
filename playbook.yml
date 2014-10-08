@@ -2,7 +2,7 @@
 - hosts: all
   sudo: True
   vars:
-      src_dir: src
+      src_dir: /usr/local/src/scade2b
   tasks:
     - name: Install packages
       apt: pkg={{item}} state=installed
