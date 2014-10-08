@@ -1,6 +1,8 @@
 ---
 - hosts: all
   sudo: True
+  vars:
+      src_dir: src
   tasks:
     - name: Install packages
       apt: pkg={{item}} state=installed
@@ -11,14 +13,14 @@
       action: git
       args:
           repo: https://github.com/cercles/scade2b.git
-          dest: src
+          dest: "{{src_dir}}"
           version: c380dec2
     - name: Build scade2b
       command: make
       args:
-          chdir: src/scade2b
+          chdir: "{{src_dir}}/scade2b"
           creates: scade2b
     - name: Install scade2b
-      command: cp src/scade2b/scade2b /usr/local/bin/
+      command: cp {{src_dir}}/scade2b/scade2b /usr/local/bin/
       args:
           creates: /usr/local/bin/scade2b
