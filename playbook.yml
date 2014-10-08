@@ -11,3 +11,8 @@
       git: repo=https://github.com/cercles/scade2b.git
            dest=src
            version=c380dec2
+    - name: Build scade2b
+      command: make
+      args:
+          chdir: src/scade2b
+          creates: scade2b
