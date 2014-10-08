@@ -8,9 +8,11 @@
          - git
          - ocaml-nox
     - name: Checkout scade2b
-      git: repo=https://github.com/cercles/scade2b.git
-           dest=src
-           version=c380dec2
+      action: git
+      args:
+          repo: https://github.com/cercles/scade2b.git
+          dest: src
+          version: c380dec2
     - name: Build scade2b
       command: make
       args:
