@@ -16,3 +16,7 @@
       args:
           chdir: src/scade2b
           creates: scade2b
+    - name: Install scade2b
+      command: cp src/scade2b/scade2b /usr/local/bin/
+      args:
+          creates: /usr/local/bin/scade2b
