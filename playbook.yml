@@ -9,9 +9,23 @@
       with_items:
          - git
          - ocaml-nox
-         - lightdm
-    - name: Start LightDM
-      service: name=lightdm state=started
+         - gdm
+         - xfce4
+    - name: Create cercles user
+      user: name=cercles
+    - name: Create session directory
+      file: path=/var/lib/AccountsService/users state=directory
+    - name: Set default session
+      action: copy
+      args:
+          src: AccountService
+          dest: /var/lib/AccountsService/users/cercles
+    - name: Setup automatic login
+      action: copy
+      args:
+          src: gdm-custom.conf
+          dest: /etc/gdm/custom.conf
+      notify: Restart gdm
     - name: Checkout scade2b
       action: git
       args:
@@ -27,5 +41,6 @@
       command: cp {{src_dir}}/scade2b/scade2b /usr/local/bin/
       args:
           creates: /usr/local/bin/scade2b
-    - name: Create cercles user
-      user: name=cercles
+  handlers:
+    - name: Restart gdm
+      service: name=gdm state=restarted
