@@ -5,7 +5,7 @@
       src_dir: /usr/local/src/scade2b
   tasks:
     - name: Install packages
-      apt: pkg={{item}} state=installed
+      apt: pkg={{item}} state=installed update_cache=yes
       with_items:
          - git
          - ocaml-nox
